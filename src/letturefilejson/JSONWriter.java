@@ -16,7 +16,7 @@ import javax.json.JsonWriter;
 
 /**
  *
- * @author MC
+ * @author enric
  */
 public class JSONWriter {
     
@@ -24,6 +24,11 @@ public class JSONWriter {
     
     /**
      * @param args the command line arguments
+     * --------------------------------------
+     * Il metodo permette di scrivere un file json prima istanziando un array di libri
+     * che poi viene aggiunto a 2 JsonObjectBuilder che poi vengono aggiunti ad un JsonArrayBuilder.
+     * Successivamente con un OutputStream viene utilizzato per il JsonWriter che scrive il file per poi chiuderlo.
+     * 
      */
     public static void main(String[] args) throws FileNotFoundException, IOException {
 

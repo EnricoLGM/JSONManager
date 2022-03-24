@@ -1,16 +1,1 @@
-{
-  "libreria": {
-    "libro": [{
-        "genere": "fantasy",
-        "titolo": "Lo Hobbit",
-        "autore": "J. R. R. Tolkien",
-        "prezzo": 9.90
-    },
-    {
-        "genere": "fantasy",
-        "titolo": "Il Signore degli Anelli",
-        "autore": "J. R. R. Tolkien",
-        "prezzo": 30.00
-    }]
-  }
-}
+{"Libreria":{"Libri":[{"genere":"fantasy","titolo":"Lo Hobbit","autore":"J. R. R. Tolkien","prezzo":9.899999618530273},{"genere":"fantasy","titolo":"Il signore degli anelli","autore":"J. R. R. Tolkien","prezzo":30.0}]}}

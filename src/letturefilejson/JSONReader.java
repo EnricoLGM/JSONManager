@@ -24,6 +24,11 @@ public class JSONReader {
     
     /**
      * @param args the command line arguments
+     * --------------------------------------
+     * Il metodo permette di leggere un file json utilizzando la classe InputStream per poi utilizzare
+     * la classe JsonReader e poi viene chiuso il file.
+     * Per visualizzare il file viene effettuato un ciclo per savlare i vari dai in un array di Libri per 
+     * poi stamparlo nella console.
      */
     public static void main(String[] args) throws FileNotFoundException {
 
