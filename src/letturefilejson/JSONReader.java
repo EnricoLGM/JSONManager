@@ -8,6 +8,7 @@ package letturefilejson;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.InputStream;
+import java.util.ArrayList;
 import javax.json.Json;
 import javax.json.JsonArray;
 import javax.json.JsonObject;
@@ -32,7 +33,7 @@ public class JSONReader {
      */
     public static void main(String[] args) throws FileNotFoundException {
 
-        Libro libri[];
+        //Libro libri[];
         
         InputStream input = new FileInputStream(JSON_FILE);
         
@@ -46,9 +47,10 @@ public class JSONReader {
         
         JsonArray jsonArray = innerJsonObject.getJsonArray("libri");
         
-        libri = new Libro[jsonArray.size()];
+        ArrayList<Libro> libri = new ArrayList<Libro>();
+        //libri = new Libro[jsonArray.size()];
         
-        int index = 0;
+        //int index = 0;
         
         for (JsonValue element : jsonArray) {
             Libro libro = new Libro();
@@ -58,12 +60,12 @@ public class JSONReader {
             libro.setAutore(element.asJsonObject().getString("autore"));
             libro.setPrezzo((float) element.asJsonObject().getJsonNumber("prezzo").doubleValue());
             
-            libri[index++] = libro;        
+            libri.add(libro);        
         }
         
-        for (index=0; index<libri.length; index++)
-            System.out.println(libri[index]);
-       
+        for (Libro libro : libri) {
+            System.out.println(libro);
+        }
     }
     
 }
