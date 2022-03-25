@@ -63,8 +63,8 @@ public class JSONWriter {
             bookArray.add(bookObject.build());           
         }
         
-        booksObject.add("Libri", bookArray.build());
-        rootObject.add("Libreria", booksObject.build());
+        booksObject.add("libri", bookArray.build());
+        rootObject.add("libreria", booksObject.build());
         
         OutputStream output = new FileOutputStream(JSON_FILE);
         
