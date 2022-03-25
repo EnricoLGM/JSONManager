@@ -32,35 +32,21 @@ public class JSONReader {
      * poi stamparlo nella console.
      */
     public static void main(String[] args) throws FileNotFoundException {
-
-        //Libro libri[];
+        
+        ArrayList<Libro> libri = new ArrayList<Libro>();
         
         InputStream input = new FileInputStream(JSON_FILE);
         
         JsonReader jsonReader = Json.createReader(input);
-        
         JsonObject jsonObject = jsonReader.readObject();
-        
         jsonReader.close();
         
         JsonObject innerJsonObject = jsonObject.getJsonObject("libreria");
         
         JsonArray jsonArray = innerJsonObject.getJsonArray("libri");
         
-        ArrayList<Libro> libri = new ArrayList<Libro>();
-        //libri = new Libro[jsonArray.size()];
-        
-        //int index = 0;
-        
         for (JsonValue element : jsonArray) {
-            Libro libro = new Libro();
-            
-            libro.setGenere(element.asJsonObject().getString("genere"));
-            libro.setTitolo(element.asJsonObject().getString("titolo"));
-            libro.setAutore(element.asJsonObject().getString("autore"));
-            libro.setPrezzo((float) element.asJsonObject().getJsonNumber("prezzo").doubleValue());
-            
-            libri.add(libro);        
+            libri.add(new Libro(element.asJsonObject().getString("genere"), element.asJsonObject().getString("titolo"), element.asJsonObject().getString("autore"), (float) element.asJsonObject().getJsonNumber("prezzo").doubleValue()));        
         }
         
         for (Libro libro : libri) {
