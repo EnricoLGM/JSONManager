@@ -9,6 +9,7 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
+import java.util.ArrayList;
 import javax.json.Json;
 import javax.json.JsonArrayBuilder;
 import javax.json.JsonObjectBuilder;
@@ -32,24 +33,12 @@ public class JSONWriter {
      */
     public static void main(String[] args) throws FileNotFoundException, IOException {
 
-        Libro libri[] = new Libro[2];
+        ArrayList<Libro> libri = new ArrayList<Libro>();
         
-        libri[0] = new Libro();
+        libri.add(new Libro("fantasy", "Lo Hobbit", "J. R. R. Tolkien", 9.9f));
         
-        libri[0].setGenere("fantasy");
-        libri[0].setTitolo("Lo Hobbit");
-        libri[0].setAutore("J. R. R. Tolkien");
-        libri[0].setPrezzo(9.9f);
+        libri.add(new Libro("fantasy", "Il signore degli anelli", "J. R. R. Tolkien", 30.00f));
         
-        
-        libri[1] = new Libro();
-        
-        libri[1].setGenere("fantasy");
-        libri[1].setTitolo("Il signore degli anelli");
-        libri[1].setAutore("J. R. R. Tolkien");
-        libri[1].setPrezzo(30.00f);
-    
-    
         JsonObjectBuilder rootObject = Json.createObjectBuilder();
         JsonObjectBuilder booksObject = Json.createObjectBuilder();
         JsonArrayBuilder bookArray = Json.createArrayBuilder();
