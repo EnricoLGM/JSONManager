@@ -5,9 +5,11 @@
  */
 package letturefilejson;
 
+import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.util.ArrayList;
 import javax.json.Json;
@@ -33,7 +35,35 @@ public class JSONWriter {
      */
     public static void main(String[] args) throws FileNotFoundException, IOException {
 
+        InputStreamReader input=new InputStreamReader(System.in);
+        BufferedReader keyboard=new BufferedReader(input);
+
+        String genere="";
+        String nome="";
+        String autore="";
+        float prezzo=0;
+        
+        try {
+            System.out.println("Scrivi il genere del libro: ");
+            genere=keyboard.readLine(); 
+            
+            System.out.println("Scrivi il nome del libro: ");
+            nome=keyboard.readLine(); 
+            
+            System.out.println("Scrivi l' autore del libro: ");
+            autore=keyboard.readLine(); 
+            
+            System.out.println("Scrivi il prezzo del libro: ");
+            prezzo=(float)keyboard.readLine(); 
+        }
+        catch (Exception e) {
+            System.out.println("Errore "+e.toString());
+        }
+        System.out.println("Il nome inserito è: "+nome);
+        
         ArrayList<Libro> libri = new ArrayList<Libro>();
+
+        libri.add(new Libro(genere, nome, autore, prezzo));
         
         libri.add(new Libro("fantasy", "Lo Hobbit", "J. R. R. Tolkien", 9.9f));
         

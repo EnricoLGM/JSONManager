@@ -32,7 +32,6 @@ public class JSONReader {
      * poi stamparlo nella console.
      */
     public static void main(String[] args) throws FileNotFoundException {
-        
         ArrayList<Libro> libri = new ArrayList<Libro>();
         
         InputStream input = new FileInputStream(JSON_FILE);
