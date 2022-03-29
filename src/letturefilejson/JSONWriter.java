@@ -38,6 +38,18 @@ public class JSONWriter {
         InputStreamReader input=new InputStreamReader(System.in);
         BufferedReader keyboard=new BufferedReader(input);
 
+        String nomeFile="";
+
+        try {
+            System.out.println("Scrivi il nome del file da leggere: ");
+            nomeFile=keyboard.readLine();
+        }
+        catch (Exception e) {
+            System.out.println("Errore "+e.toString());
+        }        
+
+        /*
+        //Inserimento dei dati per i libri tramite input dell'utente
         String genere="";
         String nome="";
         String autore="";
@@ -60,10 +72,11 @@ public class JSONWriter {
             System.out.println("Errore "+e.toString());
         }
         System.out.println("Il nome inserito è: "+nome);
+        */
         
         ArrayList<Libro> libri = new ArrayList<Libro>();
 
-        libri.add(new Libro(genere, nome, autore, prezzo));
+        //libri.add(new Libro(genere, nome, autore, prezzo));
         
         libri.add(new Libro("fantasy", "Lo Hobbit", "J. R. R. Tolkien", 9.9f));
         
@@ -85,7 +98,7 @@ public class JSONWriter {
         booksObject.add("libri", bookArray.build());
         rootObject.add("libreria", booksObject.build());
         
-        OutputStream output = new FileOutputStream(JSON_FILE);
+        OutputStream output = new FileOutputStream(nomeFile);
         
         JsonWriter jsonWriter = Json.createWriter(output);
         

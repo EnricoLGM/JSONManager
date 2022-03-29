@@ -5,9 +5,11 @@
  */
 package letturefilejson;
 
+import java.io.BufferedReader;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.util.ArrayList;
 import javax.json.Json;
 import javax.json.JsonArray;
@@ -32,11 +34,25 @@ public class JSONReader {
      * poi stamparlo nella console.
      */
     public static void main(String[] args) throws FileNotFoundException {
+
+        InputStreamReader input=new InputStreamReader(System.in);
+        BufferedReader keyboard=new BufferedReader(input);
+
+        String nomeFile="";
+
+        try {
+            System.out.println("Scrivi il nome del file da leggere: ");
+            nomeFile=keyboard.readLine();
+        }
+        catch (Exception e) {
+            System.out.println("Errore "+e.toString());
+        } 
+
         ArrayList<Libro> libri = new ArrayList<Libro>();
         
-        InputStream input = new FileInputStream(JSON_FILE);
+        InputStream inputF = new FileInputStream(nomeFile);
         
-        JsonReader jsonReader = Json.createReader(input);
+        JsonReader jsonReader = Json.createReader(inputF);
         JsonObject jsonObject = jsonReader.readObject();
         jsonReader.close();
         
