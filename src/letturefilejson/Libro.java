@@ -60,4 +60,9 @@ public class Libro {
     public void setPrezzo(float prezzo){
         this.prezzo = prezzo;
     }
+    
+    @Override
+    public String toString() {
+        return titolo + " " + autore;
+    }
 }

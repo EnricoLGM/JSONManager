@@ -65,7 +65,7 @@ public class JSONReader {
         }
         
         for (Libro libro : libri) {
-            System.out.println(libro);
+            System.out.println(libro.toString());
         }
     }
     
