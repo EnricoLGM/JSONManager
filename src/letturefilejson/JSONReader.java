@@ -11,11 +11,14 @@ import java.io.FileNotFoundException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.json.Json;
 import javax.json.JsonArray;
 import javax.json.JsonObject;
 import javax.json.JsonReader;
 import javax.json.JsonValue;
+import sun.rmi.runtime.Log;
 
 /**
  *
@@ -33,7 +36,7 @@ public class JSONReader {
      * Per visualizzare il file viene effettuato un ciclo per savlare i vari dai in un array di Libri per 
      * poi stamparlo nella console.
      */
-    public static void main(String[] args) throws FileNotFoundException {
+    public static void main(String[] args) {
 
         InputStreamReader input=new InputStreamReader(System.in);
         BufferedReader keyboard=new BufferedReader(input);
@@ -50,22 +53,27 @@ public class JSONReader {
 
         ArrayList<Libro> libri = new ArrayList<Libro>();
         
-        InputStream inputF = new FileInputStream(nomeFile);
-        
-        JsonReader jsonReader = Json.createReader(inputF);
-        JsonObject jsonObject = jsonReader.readObject();
-        jsonReader.close();
-        
-        JsonObject innerJsonObject = jsonObject.getJsonObject("libreria");
-        
-        JsonArray jsonArray = innerJsonObject.getJsonArray("libri");
-        
-        for (JsonValue element : jsonArray) {
-            libri.add(new Libro(element.asJsonObject().getString("genere"), element.asJsonObject().getString("titolo"), element.asJsonObject().getString("autore"), (float) element.asJsonObject().getJsonNumber("prezzo").doubleValue()));        
-        }
-        
-        for (Libro libro : libri) {
-            System.out.println(libro.toString());
+        InputStream inputF;
+        try {
+            inputF = new FileInputStream(nomeFile);
+            JsonReader jsonReader = Json.createReader(inputF);
+            JsonObject jsonObject = jsonReader.readObject();
+            jsonReader.close();
+
+            JsonObject innerJsonObject = jsonObject.getJsonObject("libreria");
+
+            JsonArray jsonArray = innerJsonObject.getJsonArray("libri");
+
+            for (JsonValue element : jsonArray) {
+                libri.add(new Libro(element.asJsonObject().getString("genere"), element.asJsonObject().getString("titolo"), element.asJsonObject().getString("autore"), (float) element.asJsonObject().getJsonNumber("prezzo").doubleValue()));        
+            }
+
+            for (Libro libro : libri) {
+                System.out.println(libro.toString());
+            }
+        } catch (FileNotFoundException ex) {
+            Logger.getLogger(JSONReader.class.getName()).log(Level.SEVERE, null, ex);
+            System.err.println("Errore File non Trovato");
         }
     }
     

@@ -12,6 +12,8 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.json.Json;
 import javax.json.JsonArrayBuilder;
 import javax.json.JsonObjectBuilder;
@@ -33,7 +35,7 @@ public class JSONWriter {
      * Successivamente con un OutputStream viene utilizzato per il JsonWriter che scrive il file per poi chiuderlo.
      * 
      */
-    public static void main(String[] args) throws FileNotFoundException, IOException {
+    public static void main(String[] args) {
 
         InputStreamReader input=new InputStreamReader(System.in);
         BufferedReader keyboard=new BufferedReader(input);
@@ -98,16 +100,20 @@ public class JSONWriter {
         booksObject.add("libri", bookArray.build());
         rootObject.add("libreria", booksObject.build());
         
-        OutputStream output = new FileOutputStream(nomeFile);
-        
-        JsonWriter jsonWriter = Json.createWriter(output);
-        
-        jsonWriter.writeObject(rootObject.build());
-        
-        jsonWriter.close();
-        
-        output.close();
-             
+        OutputStream output;
+        try {
+            output = new FileOutputStream(nomeFile);
+            JsonWriter jsonWriter = Json.createWriter(output);
+            jsonWriter.writeObject(rootObject.build());
+            jsonWriter.close();
+            output.close();
+        } catch (FileNotFoundException ex) {
+            Logger.getLogger(JSONWriter.class.getName()).log(Level.SEVERE, null, ex);
+            System.err.println("Errore: File non Trovato");
+        } catch (IOException ex) {
+            Logger.getLogger(JSONWriter.class.getName()).log(Level.SEVERE, null, ex);
+            System.err.println("Errore Generico di I/O");
+        }             
     }
     
 }
